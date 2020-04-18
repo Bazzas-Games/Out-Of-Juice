@@ -10,15 +10,18 @@ public class PlayerController : MonoBehaviour
     public bool isGrappling = false;
     public float groundSpeed = 5f;
     public float airSpeed = 2f;
+    public float jumpSpeed = 5f;
 
     public float grappleSpeed = 5f;
     public float grappleRange = 5f;
 
     private Vector2 inputVector = Vector2.zero;
     private Vector2 grappleVector = Vector2.zero;
+    private Vector2 grapplePoint = Vector2.zero;
     private List<Vector2> contactVectors = new List<Vector2>();
     private Rigidbody2D rb;
-    private RaycastHit2D grapplePoint;
+    private RaycastHit2D grappleRaycastHit;
+    private SpringJoint2D grappleJoint;
 
 
     void Start()
@@ -30,6 +33,7 @@ public class PlayerController : MonoBehaviour
     {
         InputPoll();
         if (isGrounded) AccelerateGround();
+        else if (isGrappling) AccelerateGrapple();
         else AccelerateAir();
     }
 
@@ -38,13 +42,25 @@ public class PlayerController : MonoBehaviour
     {
         inputVector.x = Input.GetAxisRaw("Horizontal");
         inputVector.y = Input.GetAxisRaw("Vertical");
-        if(Input.GetAxisRaw("Fire1") == 1 && !isGrappling)
+        if(Input.GetButton("Fire1") && !isGrappling)
         {
             Grapple(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         }
-        if(Input.GetAxisRaw("Fire1") == 0 && isGrappling)
+        if (isGrappling)
         {
-            isGrappling = false;
+            if (!Input.GetButton("Fire1")) {
+                StopGrapple();
+            }
+            else
+            {
+                Debug.DrawLine(transform.position, grapplePoint);
+                grappleVector = grapplePoint - (Vector2)transform.position;
+            }
+        }
+        if (Input.GetButtonDown("Jump"))
+        {
+            //if(isGrounded) 
+                Jump();
         }
     }
 
@@ -75,19 +91,33 @@ public class PlayerController : MonoBehaviour
 
     void AccelerateGrapple()
     {
-        rb.AddForce(grappleVector * grappleSpeed);
+        
         rb.AddForce(inputVector.normalized * airSpeed);
+    }
+
+    void Jump()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, 0);
+        rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
     }
     
     void Grapple(Vector2 direction)
     {
-        grapplePoint = Physics2D.Raycast(transform.position, direction - (Vector2)transform.position, grappleRange, LayerMask.GetMask("Environment"));
+        // raycast for grapple
+        grappleRaycastHit = Physics2D.Raycast(transform.position, direction - (Vector2)transform.position, grappleRange, LayerMask.GetMask("Environment"));
         Debug.DrawRay(transform.position, (direction - (Vector2)transform.position).normalized * grappleRange);
-        if (grapplePoint.collider != null)
+        
+        // if grapple hit anything
+        if (grappleRaycastHit.collider != null)
         {
+            // set grapple point
+            grapplePoint = grappleRaycastHit.point;
             isGrappling = true;
-            Debug.Log("hit "+ grapplePoint.collider.name);
         }
+    }
+    void StopGrapple()
+    {
+
     }
 
 
