@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlatformController : MonoBehaviour
+public class LoopingPlatform : MonoBehaviour
 {
-     // Transforms to act as start and end markers for journey.
-    //public Transform startMarker;
-    //public Transform endMarker;
+    // Transforms to act as start and end markers for journey.
     public Transform pos1, pos2;
-    public Transform startPos;    
+    public Transform startPos;
 
     public float speed = 1.0f;
 
@@ -34,4 +32,6 @@ public class PlatformController : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, nextPos, speed * Time.deltaTime);
 
     }
-}
+
+}    
+

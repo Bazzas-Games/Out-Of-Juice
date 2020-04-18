@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Button : MonoBehaviour
 {
-    public PlatformController platformController;
-    public bool isBeingPushed = false;
+    public LoopingPlatform loopingPlatform;
+    public bool isPowered = false;
 
     private void Update()
     {
@@ -13,13 +13,13 @@ public class Button : MonoBehaviour
     }
     public void Pushed()
     {
-        if (isBeingPushed == true)
+        if (isPowered == true)
         {
-           platformController.Move();
+            loopingPlatform.Move();
         }
         else
         {
-            isBeingPushed = false;
+            isPowered = false;
         }
 
     }
