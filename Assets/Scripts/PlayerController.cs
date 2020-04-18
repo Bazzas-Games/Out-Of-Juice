@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     
     public bool isGrounded = false;
     public bool isTouchingWall = false;
+    public float collisionBias = 0.04f;
     public bool isGrappling = false;
     public float groundSpeed = 200f;
     public float airSpeed = 2f;
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 grappleVector = Vector2.zero;
     private Vector2 grapplePoint = Vector2.zero;
     private List<Vector2> contactVectors = new List<Vector2>();
+    private List<RaycastHit2D> contacts = new List<RaycastHit2D>();
     private Rigidbody2D rb;
     private RaycastHit2D grappleRaycastHit;
     private SpringJoint2D grappleJoint;
@@ -38,6 +40,10 @@ public class PlayerController : MonoBehaviour
         if (isGrounded) rb.velocity = AccelerateGround();
         else if (isGrappling) rb.velocity = AccelerateGrapple();
         else rb.velocity = AccelerateAir();
+    }
+    void FixedUpdate()
+    {
+        UpdateContactNormals();
     }
 
     // all input-dependent methods go here
@@ -62,7 +68,7 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetButtonDown("Jump"))
         {
-            //if(isGrounded) 
+            if(isGrounded || isTouchingWall) 
                 Jump();
         }
     }
@@ -84,6 +90,38 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Player is ded");
     }
 
+    void UpdateContactNormals()
+    {
+        isGrounded = false;
+        isTouchingWall = false;
+        List<Vector2> toRemove = new List<Vector2>();
+        foreach(Vector2 v in contactVectors)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, v, v.magnitude + collisionBias, LayerMask.GetMask("Environment"));
+            if(hit.collider != null)
+            {
+                float angle = Vector2.Angle(Vector3.up, hit.normal);
+                if (angle == 0)
+                {
+                    isGrounded = true;
+                    Debug.DrawRay(hit.point, hit.normal, Color.green);
+                }
+                else if(angle == 90 || angle == -90)
+                {
+                    isTouchingWall = true;
+                    Debug.DrawRay(hit.point, hit.normal, Color.yellow);
+                }
+            }
+            else
+            {
+                toRemove.Add(v);
+            }
+        }
+        foreach(Vector2 v in toRemove)
+        {
+            contactVectors.Remove(v);
+        }
+    }
 
 
 
