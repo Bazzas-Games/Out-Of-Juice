@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
             if (!contactVectors.Contains(contactVector)) contactVectors.Add(contactVector);
         }
     }
-    void Kill()
+    public void Kill()
     {
         Debug.Log("Player is ded");
     }
