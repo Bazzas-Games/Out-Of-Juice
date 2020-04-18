@@ -247,10 +247,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 280311684}
+  - component: {fileID: 280311687}
   - component: {fileID: 280311683}
   - component: {fileID: 280311685}
   - component: {fileID: 280311686}
-  - component: {fileID: 280311687}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -342,7 +342,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &280311686
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -381,6 +381,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1552b57b86769748a326585a0809b95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGrounded: 0
+  isTouchingWall: 0
+  isGrappling: 0
+  groundSpeed: 5
+  airSpeed: 3
+  grappleSpeed: 5
+  grappleRange: 5
 --- !u!1 &521336689
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,7 +399,7 @@ GameObject:
   - component: {fileID: 521336692}
   - component: {fileID: 521336691}
   - component: {fileID: 521336690}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -500,7 +507,7 @@ GameObject:
   - component: {fileID: 529452775}
   - component: {fileID: 529452774}
   - component: {fileID: 529452773}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -652,7 +659,7 @@ GameObject:
   - component: {fileID: 1223663148}
   - component: {fileID: 1223663147}
   - component: {fileID: 1223663149}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -760,7 +767,7 @@ GameObject:
   - component: {fileID: 1350015573}
   - component: {fileID: 1350015572}
   - component: {fileID: 1350015574}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -868,7 +875,7 @@ GameObject:
   - component: {fileID: 1443491141}
   - component: {fileID: 1443491140}
   - component: {fileID: 1443491142}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
