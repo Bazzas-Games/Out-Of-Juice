@@ -837,7 +837,7 @@ PrefabInstance:
     - target: {fileID: 7074414368484911848, guid: 7b26803f2700aca4299940606b019d6a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 4.12
       objectReference: {fileID: 0}
     - target: {fileID: 7074414368484911848, guid: 7b26803f2700aca4299940606b019d6a,
         type: 3}
@@ -884,30 +884,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7074414368484911850, guid: 7b26803f2700aca4299940606b019d6a,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: 7621808c0c774734b82f5fd161f66b3a, type: 2}
     - target: {fileID: 7074414368484911851, guid: 7b26803f2700aca4299940606b019d6a,
         type: 3}
-      propertyPath: grappleSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7074414368484911851, guid: 7b26803f2700aca4299940606b019d6a,
-        type: 3}
-      propertyPath: jumpSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7074414368484911851, guid: 7b26803f2700aca4299940606b019d6a,
-        type: 3}
-      propertyPath: grappleRange
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7074414368484911851, guid: 7b26803f2700aca4299940606b019d6a,
-        type: 3}
-      propertyPath: airSpeed
-      value: 3
+      propertyPath: airResistance
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7074414368484911854, guid: 7b26803f2700aca4299940606b019d6a,
         type: 3}

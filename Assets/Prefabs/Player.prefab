@@ -130,13 +130,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1552b57b86769748a326585a0809b95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 0
+  isGrounded: 1
   isTouchingWall: 0
   isGrappling: 0
-  groundSpeed: 5
-  airSpeed: 5
-  grappleSpeed: 5
-  grappleRange: 5
+  groundSpeed: 200
+  airSpeed: 150
+  airResistance: 2
+  jumpSpeed: 5
+  maxVelocity: 5
+  friction: 20
+  grappleSpeed: 3
+  grappleRange: 10
 --- !u!212 &7074414368484911855
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -217,7 +221,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 7074414368484911854}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 7621808c0c774734b82f5fd161f66b3a, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0

@@ -8,9 +8,12 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded = false;
     public bool isTouchingWall = false;
     public bool isGrappling = false;
-    public float groundSpeed = 5f;
+    public float groundSpeed = 200f;
     public float airSpeed = 2f;
+    public float airResistance = 10f;
     public float jumpSpeed = 5f;
+    public float maxVelocity = 3f;
+    public float friction = 20f;
 
     public float grappleSpeed = 5f;
     public float grappleRange = 5f;
@@ -32,9 +35,9 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         InputPoll();
-        if (isGrounded) AccelerateGround();
-        else if (isGrappling) AccelerateGrapple();
-        else AccelerateAir();
+        if (isGrounded) rb.velocity = AccelerateGround();
+        else if (isGrappling) rb.velocity = AccelerateGrapple();
+        else rb.velocity = AccelerateAir();
     }
 
 
@@ -74,31 +77,64 @@ public class PlayerController : MonoBehaviour
             if (!contactVectors.Contains(contactVector)) contactVectors.Add(contactVector);
         }
     }
+
     public void Kill()
     {
         Debug.Log("Player is ded");
     }
 
-    void AccelerateGround()
+
+
+
+    Vector2 Accelerate(Vector2 accelDir, Vector2 currentVel, float accelVel, float maxVel)
     {
-        rb.AddForce(new Vector2(inputVector.x * groundSpeed, 0));
+        float projVel = Vector2.Dot(currentVel, accelDir);
+        accelVel *= Time.deltaTime;
+        if(projVel + accelVel > maxVel)
+        {
+            accelVel = maxVel - projVel;
+        }
+        return currentVel + accelVel * accelDir;
     }
 
-    void AccelerateAir()
+
+    Vector2 AccelerateGround()
     {
-        rb.AddForce(new Vector2(inputVector.x * airSpeed, 0));
+        float speed = Mathf.Abs(rb.velocity.x);
+        if(speed != 0)
+        {
+            float slow = speed * friction * Time.deltaTime;
+            rb.velocity *= new Vector2(Mathf.Max(speed - slow, 0) / speed, 1);
+        }
+        return Accelerate(new Vector2(inputVector.x, 0), rb.velocity, groundSpeed, maxVelocity);
     }
 
-    void AccelerateGrapple()
+
+    Vector2 AccelerateAir()
     {
-        
-        rb.AddForce(inputVector.normalized * airSpeed);
+        float speed = Mathf.Abs(rb.velocity.x);
+        if (speed != 0)
+        {
+            float slow = speed * airResistance * Time.deltaTime;
+            rb.velocity *= new Vector2(Mathf.Max(speed - slow, 0) / speed, 1);
+        }
+        return Accelerate(new Vector2(inputVector.x, 0), rb.velocity, airSpeed, maxVelocity);
     }
+
+
+    Vector2 AccelerateGrapple()
+    {
+
+        return Accelerate(inputVector.normalized, rb.velocity, airSpeed, maxVelocity);
+    }
+
+
+
 
     void Jump()
     {
-        rb.velocity = new Vector2(rb.velocity.x, 0);
-        rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
+        isGrounded = false;
+        rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
     }
     
     void Grapple(Vector2 direction)
@@ -117,7 +153,7 @@ public class PlayerController : MonoBehaviour
     }
     void StopGrapple()
     {
-
+        isGrappling = false;
     }
 
 
