@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Button : MonoBehaviour
 {
-    public LoopingPlatform loopingPlatform;
+    public Door[] door;
+    public LoopingPlatform[] loopingPlatform;
     public bool isPowered = false;
 
     private void Update()
@@ -15,7 +16,14 @@ public class Button : MonoBehaviour
     {
         if (isPowered == true)
         {
-            loopingPlatform.Move();
+            foreach(Door d in door)
+            {
+                d.Move();
+            }
+            foreach(LoopingPlatform l in loopingPlatform)
+            {
+                l.Move();
+            }
         }
         else
         {

@@ -19,7 +19,6 @@ public class LoopingPlatform : MonoBehaviour
 
     public void Move()
     {
-
         if (transform.position == pos1.position)
         {
             nextPos = pos2.position;
@@ -30,8 +29,8 @@ public class LoopingPlatform : MonoBehaviour
         }
 
         transform.position = Vector3.MoveTowards(transform.position, nextPos, speed * Time.deltaTime);
-
     }
 
-}    
+}
+
 
