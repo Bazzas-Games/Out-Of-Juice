@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
         else rb.velocity = AccelerateAir();
     }
 
-
+    // all input-dependent methods go here
     void InputPoll()
     {
         inputVector.x = Input.GetAxisRaw("Horizontal");
@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // add collision points to list of rays to cast
     void OnCollisionEnter2D(Collision2D collision)
     {
         ContactPoint2D[] contactPoints = new ContactPoint2D[collision.contactCount];
