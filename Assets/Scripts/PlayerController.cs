@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     private SpringJoint2D grappleJoint;
     private LineRenderer lr;
     private float walljumpInputDelay = 0.5f;
+    private bool hasInput = true;
 
 
     void Start()
@@ -216,6 +217,11 @@ public class PlayerController : MonoBehaviour
     void StopGrapple()
     {
         isGrappling = false;
+    }
+    
+    void Timer()
+    {
+        if (!hasInput) ;
     }
 
 
