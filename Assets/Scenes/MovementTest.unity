@@ -1053,6 +1053,21 @@ PrefabInstance:
       propertyPath: m_UpscaleRT
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7074414367432139369, guid: 7b26803f2700aca4299940606b019d6a,
+        type: 3}
+      propertyPath: orthographic size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7074414367432139369, guid: 7b26803f2700aca4299940606b019d6a,
+        type: 3}
+      propertyPath: m_NormalizedViewPortRect.width
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7074414367432139369, guid: 7b26803f2700aca4299940606b019d6a,
+        type: 3}
+      propertyPath: m_ForceIntoRT
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7074414368484911848, guid: 7b26803f2700aca4299940606b019d6a,
         type: 3}
       propertyPath: m_LocalPosition.x

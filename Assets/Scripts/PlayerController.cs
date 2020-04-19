@@ -57,14 +57,22 @@ public class PlayerController : MonoBehaviour
         if (isGrounded)
         {
             rb.velocity = AccelerateGround();
-            if (rb.velocity.magnitude <= 0.3f)
-            {
-                anim.SetBool("isRunning", false);
-            }
-            else anim.SetBool("isRunning", true);
+
         }
         else if (isGrappling) rb.velocity = AccelerateGrapple();
         else rb.velocity = AccelerateAir();
+
+        // update animation variables
+        anim.SetBool("isGrounded", isGrounded);
+        anim.SetBool("isTouchingWall", isTouchingWall);
+        anim.SetFloat("xVel", Mathf.Abs(rb.velocity.x));
+        anim.SetFloat("yVel", rb.velocity.y);
+        if(!isGrounded && isTouchingWall)
+        {
+            if (wallNormal.x > 0) sprite.flipX = false;
+            else sprite.flipX = true;
+        }
+
     }
     void FixedUpdate()
     {
@@ -213,6 +221,7 @@ public class PlayerController : MonoBehaviour
     {
         isGrounded = false;
         rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+        anim.SetTrigger("jump");
     }
     void WallJump()
     {
