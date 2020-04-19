@@ -195,6 +195,31 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 6239638553375099476, guid: 65f533e9e88036b4a86f4256bde5483b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239638553375099476, guid: 65f533e9e88036b4a86f4256bde5483b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239638553375099476, guid: 65f533e9e88036b4a86f4256bde5483b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239638553375099476, guid: 65f533e9e88036b4a86f4256bde5483b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239638553375099476, guid: 65f533e9e88036b4a86f4256bde5483b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6239638553375099477, guid: 65f533e9e88036b4a86f4256bde5483b,
         type: 3}
       propertyPath: m_SortingLayerID
@@ -255,6 +280,11 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6239638554526131122, guid: 65f533e9e88036b4a86f4256bde5483b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6239638554526131132, guid: 65f533e9e88036b4a86f4256bde5483b,
         type: 3}
       propertyPath: m_SortingLayerID
@@ -274,6 +304,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingLayer
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239638554657321056, guid: 65f533e9e88036b4a86f4256bde5483b,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239638554657321056, guid: 65f533e9e88036b4a86f4256bde5483b,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239638554657321056, guid: 65f533e9e88036b4a86f4256bde5483b,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6239638554673896360, guid: 65f533e9e88036b4a86f4256bde5483b,
         type: 3}
@@ -343,7 +388,7 @@ PrefabInstance:
     - target: {fileID: 6239638554793596633, guid: 65f533e9e88036b4a86f4256bde5483b,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6239638554793596633, guid: 65f533e9e88036b4a86f4256bde5483b,
         type: 3}
@@ -363,12 +408,22 @@ PrefabInstance:
     - target: {fileID: 6239638554793596633, guid: 65f533e9e88036b4a86f4256bde5483b,
         type: 3}
       propertyPath: m_UpscaleRT
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6239638554793596633, guid: 65f533e9e88036b4a86f4256bde5483b,
         type: 3}
       propertyPath: m_PixelSnapping
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239638554793596633, guid: 65f533e9e88036b4a86f4256bde5483b,
+        type: 3}
+      propertyPath: m_RefResolutionY
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239638554793596633, guid: 65f533e9e88036b4a86f4256bde5483b,
+        type: 3}
+      propertyPath: m_AssetsPPU
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6239638554793596637, guid: 65f533e9e88036b4a86f4256bde5483b,
         type: 3}
@@ -378,7 +433,7 @@ PrefabInstance:
     - target: {fileID: 6239638554793596639, guid: 65f533e9e88036b4a86f4256bde5483b,
         type: 3}
       propertyPath: orthographic size
-      value: 4.625651
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6239638554793596639, guid: 65f533e9e88036b4a86f4256bde5483b,
         type: 3}
@@ -1057,7 +1112,7 @@ Canvas:
   m_GameObject: {fileID: 1351518254}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 1820433984}
   m_PlaneDistance: 5
   m_PixelPerfect: 1
