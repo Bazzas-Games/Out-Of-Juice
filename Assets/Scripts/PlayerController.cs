@@ -128,7 +128,7 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Player is ded");
     }
-
+    
     void DrawGrapple()
     {
         if (!isGrappling) return;
