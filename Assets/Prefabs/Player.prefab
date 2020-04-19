@@ -118,6 +118,7 @@ GameObject:
   - component: {fileID: 7074414368484911849}
   - component: {fileID: 7074414368484911850}
   - component: {fileID: 280311683}
+  - component: {fileID: 1394683693}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -154,7 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGrounded: 1
   isTouchingWall: 0
-  collisionBias: 0.04
+  collisionBias: 0.06
   isGrappling: 0
   groundSpeed: 200
   airSpeed: 50
@@ -164,6 +165,9 @@ MonoBehaviour:
   friction: 20
   grappleSpeed: 3
   grappleRange: 10
+  walljumpInputDelay: 0.3
+  maxBattery: 5
+  currentBattery: 5
 --- !u!212 &7074414368484911855
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -281,3 +285,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1394683693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7074414368484911854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0edfd2727eeca4194c3ebd895c2e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

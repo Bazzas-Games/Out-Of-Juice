@@ -18,7 +18,14 @@ public class PlayerController : MonoBehaviour
 
     public float grappleSpeed = 5f;
     public float grappleRange = 5f;
+    public float walljumpInputDelay = 0.5f;
 
+    public int maxBattery = 5;
+    public int currentBattery = 5;
+
+    private float elapsedTime = 0f;
+    private float startTime = 0f;
+  
     private Vector2 wallNormal = Vector2.zero;
     private Vector2 inputVector = Vector2.zero;
     private Vector2 grappleVector = Vector2.zero;
@@ -29,7 +36,6 @@ public class PlayerController : MonoBehaviour
     private RaycastHit2D grappleRaycastHit;
     private SpringJoint2D grappleJoint;
     private LineRenderer lr;
-    private float walljumpInputDelay = 0.5f;
     private bool hasInput = true;
     private Animator anim;
     private SpriteRenderer sprite;
@@ -54,6 +60,7 @@ public class PlayerController : MonoBehaviour
             sprite.flipX = false;
         }
         InputPoll();
+
         if (isGrounded)
         {
             rb.velocity = AccelerateGround();
@@ -86,8 +93,17 @@ public class PlayerController : MonoBehaviour
     // all input-dependent methods go here
     void InputPoll()
     {
-        inputVector.x = Input.GetAxisRaw("Horizontal");
-        inputVector.y = Input.GetAxisRaw("Vertical");
+        if (!hasInput)
+        {
+            elapsedTime = Time.time - startTime;
+            inputVector = Vector3.zero;
+            if (elapsedTime >= walljumpInputDelay) hasInput = true;
+        }
+        else
+        {
+            inputVector.x = Input.GetAxisRaw("Horizontal");
+            inputVector.y = Input.GetAxisRaw("Vertical");
+        }
         if(Input.GetButton("Fire1") && !isGrappling)
         {
             Grapple(Camera.main.ScreenToWorldPoint(Input.mousePosition));
@@ -135,6 +151,12 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void ModifyBattery(int amount)
+    {
+        currentBattery += amount;
+        if (currentBattery > maxBattery) currentBattery = maxBattery;
+        else if (currentBattery <= 0) Kill();
+    }
 
     void UpdateContactNormals()
     {
@@ -225,7 +247,7 @@ public class PlayerController : MonoBehaviour
     }
     void WallJump()
     {
-        if(!isGrounded)
+        StartDelay();
         rb.velocity = new Vector2(wallNormal.x * jumpSpeed, jumpSpeed);
     }
     
@@ -247,10 +269,12 @@ public class PlayerController : MonoBehaviour
     {
         isGrappling = false;
     }
-    
-    void Timer()
+
+    void StartDelay()
     {
-        if (!hasInput) ;
+        hasInput = false;
+        elapsedTime = 0f;
+        startTime = Time.time;
     }
 
 
