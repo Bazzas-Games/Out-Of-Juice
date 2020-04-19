@@ -29,7 +29,7 @@ public class MomentumPlatform : MonoBehaviour
     // Move to the target end position.
     void Update()
     {
-        // Distance moved equals elapsed time times speed..
+        // Distance moved equals elapsed time times speed.
         float distCovered = (Time.time - startTime) * speed;
 
         // Fraction of journey completed equals current distance divided by total distance.

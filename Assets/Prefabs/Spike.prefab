@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 706485308459271839}
   - component: {fileID: 1379516169967696579}
   - component: {fileID: 3385145219435615066}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spike
   m_TagString: Hazard
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
