@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public float grappleSpeed = 5f;
     public float grappleRange = 5f;
 
+    private Vector2 wallNormal = Vector2.zero;
     private Vector2 inputVector = Vector2.zero;
     private Vector2 grappleVector = Vector2.zero;
     private Vector2 grapplePoint = Vector2.zero;
@@ -27,11 +28,14 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private RaycastHit2D grappleRaycastHit;
     private SpringJoint2D grappleJoint;
+    private LineRenderer lr;
+    private float walljumpInputDelay = 0.5f;
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        lr = GetComponent<LineRenderer>();
     }
 
     void Update()
@@ -44,6 +48,10 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         UpdateContactNormals();
+    }
+    void LateUpdate()
+    {
+        DrawGrapple();
     }
 
     // all input-dependent methods go here
@@ -68,8 +76,10 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetButtonDown("Jump"))
         {
-            if(isGrounded || isTouchingWall) 
+            if (isGrounded)
                 Jump();
+            else if (isTouchingWall)
+                WallJump();
         }
     }
 
@@ -90,6 +100,13 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Player is ded");
     }
 
+    void DrawGrapple()
+    {
+        if (!isGrappling) return;
+
+    }
+
+
     void UpdateContactNormals()
     {
         isGrounded = false;
@@ -108,6 +125,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if(angle == 90 || angle == -90)
                 {
+                    wallNormal = hit.normal;
                     isTouchingWall = true;
                     Debug.DrawRay(hit.point, hit.normal, Color.yellow);
                 }
@@ -174,6 +192,11 @@ public class PlayerController : MonoBehaviour
     {
         isGrounded = false;
         rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+    }
+    void WallJump()
+    {
+        if(!isGrounded)
+        rb.velocity = new Vector2(wallNormal.x * jumpSpeed, jumpSpeed);
     }
     
     void Grapple(Vector2 direction)
