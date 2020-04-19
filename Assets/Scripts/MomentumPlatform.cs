@@ -7,6 +7,7 @@ public class MomentumPlatform : MonoBehaviour
     // Transforms to act as start and end markers for the journey.
     public Transform startMarker;
     public Transform endMarker;
+    Transform tempTrans;
 
     // Movement speed in units per second.
     public float speed = 4.0F;
@@ -16,6 +17,11 @@ public class MomentumPlatform : MonoBehaviour
 
     // Total distance between the markers.
     private float journeyLength;
+
+    Rigidbody2D rb;
+    public GameObject object1, object2;
+
+    public float thrust = 4.0f;
 
     void Start()
     {
@@ -37,5 +43,47 @@ public class MomentumPlatform : MonoBehaviour
 
         // Set our position as a fraction of the distance between the markers.
         transform.position = Vector3.Lerp(startMarker.position, endMarker.position, fractionOfJourney);
+
+        if(Input.GetButtonDown("Jump"))
+        {
+            rb.AddForce(transform.up * thrust, ForceMode2D.Impulse);
+        }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision) 
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            ChangeParent();
+            rb = GetComponentInChildren<Rigidbody2D>();
+        }
+        else
+        {
+            RevertParent();
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision) 
+    {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            RevertParent();
+        }
+    }
+
+    // Make Player a child of MPlatform.
+    void ChangeParent()
+    {
+        tempTrans = object2.transform.parent;
+        object2.transform.parent = object1.transform;
+       
+    }
+
+    // Revert the parent of player.
+    void RevertParent()
+    {
+        object2.transform.parent = tempTrans;
+    }
+
+    
 }
