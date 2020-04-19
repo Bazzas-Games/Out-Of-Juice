@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class BatteryRecharge : MonoBehaviour
 {
-    public float boost = 1f;
-
+    public int boost = 1;
     void OnTriggerEnter2D(Collider2D otherObj) 
     {
         if (otherObj.gameObject.CompareTag("Player")) 
         {
-            //GetComponent<PlayerController>().ModifyBattery();
+            otherObj.GetComponent<PlayerController>().ModifyBattery(boost);
             Destroy();
         }
     }
