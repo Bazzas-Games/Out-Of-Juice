@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2825479942128009914}
   - component: {fileID: 2825479942128009913}
   - component: {fileID: 2825479942128009912}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Beam
   m_TagString: Hazard
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2825479942531697213}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 2825479943180064627}
   - component: {fileID: 2825479943180064628}
   - component: {fileID: 2825479943180064629}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bottom
   m_TagString: Enviro
   m_Icon: {fileID: 0}
@@ -272,7 +272,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2825479943531566284}
   - component: {fileID: 2825479943531566285}
-  m_Layer: 0
+  - component: {fileID: 4634127327735061013}
+  m_Layer: 8
   m_Name: Top
   m_TagString: Enviro
   m_Icon: {fileID: 0}
@@ -343,3 +344,29 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &4634127327735061013
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2825479943531566283}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
