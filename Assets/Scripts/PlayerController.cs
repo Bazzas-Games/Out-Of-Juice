@@ -31,18 +31,38 @@ public class PlayerController : MonoBehaviour
     private LineRenderer lr;
     private float walljumpInputDelay = 0.5f;
     private bool hasInput = true;
+    private Animator anim;
+    private SpriteRenderer sprite;
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         lr = GetComponent<LineRenderer>();
+        anim = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
+        if(rb.velocity.x < 0)
+        {
+            sprite.flipX = true;
+        }
+        else if(rb.velocity.x > 0)
+        {
+            sprite.flipX = false;
+        }
         InputPoll();
-        if (isGrounded) rb.velocity = AccelerateGround();
+        if (isGrounded)
+        {
+            rb.velocity = AccelerateGround();
+            if (rb.velocity.magnitude <= 0.3f)
+            {
+                anim.SetBool("isRunning", false);
+            }
+            else anim.SetBool("isRunning", true);
+        }
         else if (isGrappling) rb.velocity = AccelerateGrapple();
         else rb.velocity = AccelerateAir();
     }

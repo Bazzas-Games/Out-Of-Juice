@@ -99,8 +99,8 @@ MonoBehaviour:
   m_AssetsPPU: 16
   m_RefResolutionX: 320
   m_RefResolutionY: 180
-  m_UpscaleRT: 1
-  m_PixelSnapping: 0
+  m_UpscaleRT: 0
+  m_PixelSnapping: 1
   m_CropFrameX: 0
   m_CropFrameY: 0
   m_StretchFill: 0
@@ -154,9 +154,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGrounded: 1
   isTouchingWall: 0
+  collisionBias: 0.04
   isGrappling: 0
   groundSpeed: 200
-  airSpeed: 150
+  airSpeed: 50
   airResistance: 2
   jumpSpeed: 9.5
   maxVelocity: 5

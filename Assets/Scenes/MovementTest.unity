@@ -1045,6 +1045,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1467301639, guid: 7b26803f2700aca4299940606b019d6a, type: 3}
+      propertyPath: m_PixelSnapping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1467301639, guid: 7b26803f2700aca4299940606b019d6a, type: 3}
+      propertyPath: m_UpscaleRT
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7074414368484911848, guid: 7b26803f2700aca4299940606b019d6a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1053,7 +1061,7 @@ PrefabInstance:
     - target: {fileID: 7074414368484911848, guid: 7b26803f2700aca4299940606b019d6a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.12
+      value: 3.87
       objectReference: {fileID: 0}
     - target: {fileID: 7074414368484911848, guid: 7b26803f2700aca4299940606b019d6a,
         type: 3}
@@ -1100,15 +1108,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7074414368484911851, guid: 7b26803f2700aca4299940606b019d6a,
+    - target: {fileID: 7074414368484911850, guid: 7b26803f2700aca4299940606b019d6a,
         type: 3}
-      propertyPath: airSpeed
-      value: 50
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7074414368484911850, guid: 7b26803f2700aca4299940606b019d6a,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 7074414368484911854, guid: 7b26803f2700aca4299940606b019d6a,
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7074414368484911855, guid: 7b26803f2700aca4299940606b019d6a,
+        type: 3}
+      propertyPath: m_FlipX
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b26803f2700aca4299940606b019d6a, type: 3}
