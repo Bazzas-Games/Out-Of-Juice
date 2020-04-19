@@ -4,24 +4,10 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    public Rigidbody2D rb;
+    public float amount = 5f;
 
-    Vector2 movement;
-
-    void Start()
+    private void FixedUpdate()
     {
-        rb = GetComponent<Rigidbody2D>();
-	}
-
-    // Update is called once per frame
-    void Update()
-    {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        
-    }
-    void FixedUpdate()
-    {
-        rb.MovePosition(rb.position + movement * Time.fixedDeltaTime);
+        transform.position += new Vector3(amount, 0, 0);
 	}
 }

@@ -46,7 +46,10 @@ public class MomentumPlatform : MonoBehaviour
 
         if(Input.GetButtonDown("Jump"))
         {
+            if(rb != null)
+            {
             rb.AddForce(transform.up * thrust, ForceMode2D.Impulse);
+            }
         }
     }
 
