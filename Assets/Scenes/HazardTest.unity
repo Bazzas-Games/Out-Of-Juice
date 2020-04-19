@@ -979,6 +979,10 @@ PrefabInstance:
       propertyPath: m_AssetsPPU
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: 1467301639, guid: 7b26803f2700aca4299940606b019d6a, type: 3}
+      propertyPath: m_CropFrameY
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7074414367432139369, guid: 7b26803f2700aca4299940606b019d6a,
         type: 3}
       propertyPath: orthographic size
