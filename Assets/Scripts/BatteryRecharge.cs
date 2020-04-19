@@ -10,7 +10,7 @@ public class BatteryRecharge : MonoBehaviour
     {
         if (otherObj.gameObject.CompareTag("Player")) 
         {
-            GetComponent<PlayerController>().ModifyBattery();
+            //GetComponent<PlayerController>().ModifyBattery();
             Destroy();
         }
     }
