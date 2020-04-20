@@ -4,31 +4,37 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
-
+    [Header("Graphics")]
     public Animator hud;
 
+    [Header("Collisions")]
     public bool isGrounded = false;
     public bool isTouchingWall = false;
     public float collisionBias = 0.04f;
-    public bool isGrappling = false;
+
+    [Header("Movement")]
     public float groundSpeed = 200f;
+    public float maxVelocity = 3f;
+    public float friction = 20f;
     public float airSpeed = 2f;
     public float airResistance = 10f;
     public float jumpSpeed = 5f;
-    public float maxVelocity = 3f;
-    public float friction = 20f;
+    public float walljumpInputDelay = 0.5f;
 
+    [Header("Grappling Hook")]
+    public bool isGrappling = false;
     public float grappleSpeed = 5f;
     public float grappleForce = 5f;
     public float grappleManoevreSpeed = 3f;
     public float grappleRange = 5f;
     public float grappleMinDistance = .5f;
     
-    public float walljumpInputDelay = 0.5f;
-
+    [Header("Battery")]
     public int maxBattery = 5;
     public int currentBattery = 5;
 
+    [Header("Checkpoints")]
+    public GameObject checkpointPrefab;
     public Checkpoint checkpoint;
 
     private float elapsedTime = 0f;
@@ -64,6 +70,8 @@ public class PlayerController : MonoBehaviour {
         for(int i = 0; i < pickUps.Length; i++) {
             pickUps[i] = pickupObjects[i].GetComponent<PickUp>();
         }
+        checkpoint = Instantiate(checkpointPrefab, transform.position, Quaternion.identity).GetComponent<Checkpoint>();
+
     }
 
     void Update() {
@@ -152,15 +160,17 @@ public class PlayerController : MonoBehaviour {
 
     public void Kill() {
         Debug.Log("Player is ded");
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
         // play animation
 
+        // reset battery
         ModifyBattery(5);
+
+        // enable all pickups
         foreach(PickUp p in pickUps) {
             p.Enable();
         }
-        if (checkpoint == null) ;
+        rb.velocity = Vector3.zero;
+        transform.position = checkpoint.transform.position;
     }
 
     void DrawGrapple() {
