@@ -159,7 +159,9 @@ public class PlayerController : MonoBehaviour {
         if (collision.gameObject.CompareTag("Button")) {
             Button b = collision.collider.GetComponent<Button>();
             foreach (ContactPoint2D c in contactPoints) {
-                if (Vector2.Angle(c.normal, b.gameObject.transform.up) <= 45){
+                float angle = Vector2.Angle(c.normal, b.gameObject.transform.up);
+                //Debug.Log(angle);
+                if ( angle <= 45){
                     b.Press();
                 }
             }

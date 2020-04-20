@@ -15,17 +15,21 @@ public class Button : MonoBehaviour
 
     public void Press()
     {
-        foreach(GameObject i in interactObjects) {
-            Door d;
-            LoopingPlatform p;
-            if(i.TryGetComponent<Door>(out d)) {
-                d.Move();
+        if (!isPowered) {
+            foreach (GameObject i in interactObjects) {
+                Door d;
+                LoopingPlatform p;
+                if (i.TryGetComponent<Door>(out d)) {
+                    d.Move();
+                }
+                if (i.TryGetComponent<LoopingPlatform>(out p)) {
+                    p.Move();
+                }
             }
-            if(i.TryGetComponent<LoopingPlatform>(out p)) {
-                p.Move();
-            }
+            Debug.Log("Ping");
+            isPowered = true;
+            anim.SetBool("isPowered", isPowered);
         }
-        anim.SetBool("isPowered", isPowered);
     }
 
     public void Reset() {
@@ -39,6 +43,7 @@ public class Button : MonoBehaviour
                 //p.Reset();
             }
         }
+        isPowered = false;
         anim.SetBool("isPowered", isPowered);
     }
 }
