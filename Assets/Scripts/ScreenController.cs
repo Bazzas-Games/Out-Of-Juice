@@ -14,7 +14,7 @@ public class ScreenController : MonoBehaviour
     [Header("Editor settings")]
     public Vector2 numberOfScreens = new Vector2(20, 20);
     private Vector2 unitsPerScreen = new Vector2(32, 18);
-
+    private Vector3 prevCamPosition = Vector3.zero;
     private GameObject player;
 
     void Start() {
@@ -26,6 +26,10 @@ public class ScreenController : MonoBehaviour
     void Update() {
         Vector3 offsetPlayerPos = player.transform.position + cameraOffset;
         sceneCamera.transform.position = new Vector3(Mathf.Ceil((offsetPlayerPos.x/unitsPerScreen.x)) * unitsPerScreen.x, Mathf.Ceil(offsetPlayerPos.y/unitsPerScreen.y) * unitsPerScreen.y, -20);
+        if(sceneCamera.transform.position != prevCamPosition) {
+            player.GetComponent<PlayerController>().ModifyBattery(5);
+            prevCamPosition = sceneCamera.transform.position;
+        }
     }
 
 
