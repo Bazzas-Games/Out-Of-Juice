@@ -8,6 +8,7 @@ public class PickUp : MonoBehaviour
     {
         if (otherObj.gameObject.CompareTag("Player")){
             Disable();
+            Debug.Log("Ping!");
         }
     }
     public void Enable(){

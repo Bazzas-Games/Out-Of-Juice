@@ -11,6 +11,8 @@ public class BatteryRecharge : PickUp
         if (otherObj.gameObject.CompareTag("Player")) 
         {
             otherObj.GetComponent<PlayerController>().ModifyBattery(boost);
+            Disable();
+
         }
     }
 }  

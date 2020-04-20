@@ -26,7 +26,6 @@ public class Button : MonoBehaviour
                     p.Move();
                 }
             }
-            Debug.Log("Ping");
             isPowered = true;
             anim.SetBool("isPowered", isPowered);
         }
