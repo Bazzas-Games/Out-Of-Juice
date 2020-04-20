@@ -271,6 +271,14 @@ public class PlayerController : MonoBehaviour {
         }
         return currentVel + accelVel * accelDir;
     }
+    Vector2 FakeAccelerate(Vector2 accelDir, Vector2 currentVel, float accelVel, float maxVel) {
+        float projVel = Vector2.Dot(currentVel, accelDir);
+        accelVel *= Time.deltaTime;
+        if (projVel < maxVel) {
+            return currentVel + accelDir * accelVel;
+        }
+        else return currentVel;
+    }
 
 
     Vector2 AccelerateGround() {
@@ -298,7 +306,7 @@ public class PlayerController : MonoBehaviour {
             float slow = speed * airResistance * Time.deltaTime;
             rb.velocity *= new Vector2(Mathf.Max(speed - slow, 0) / speed, 1);
         }
-        return Accelerate(new Vector2(inputVectorAir.x, 0), rb.velocity, airSpeed, maxVelocity);
+        return FakeAccelerate(new Vector2(inputVectorAir.x, 0), rb.velocity, airSpeed, maxVelocity);
     }
 
 

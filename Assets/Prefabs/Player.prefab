@@ -57,7 +57,7 @@ MonoBehaviour:
   maxVelocity: 5
   friction: 20
   airSpeed: 50
-  airResistance: 2
+  airResistance: 1
   jumpSpeed: 9.5
   walljumpInputDelay: 0.3
   isGrappling: 0
