@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4602599742144140424}
   - component: {fileID: 3671887346335334952}
   m_Layer: 8
-  m_Name: platform
+  m_Name: LoopingPlatform
   m_TagString: Enviro
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
