@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour {
     public int maxBattery = 5;
     public int currentBattery = 5;
 
+    public Checkpoint checkpoint;
+
     private float elapsedTime = 0f;
     private float startTime = 0f;
     private float grappleDistance = 0f;
@@ -48,6 +50,7 @@ public class PlayerController : MonoBehaviour {
     private bool hasGroundInput = true;
     private Animator anim;
     private SpriteRenderer sprite;
+    private List<PickUp> pickUps = new List<PickUp>();
 
 
     void Start() {
@@ -56,6 +59,7 @@ public class PlayerController : MonoBehaviour {
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
+        GameObject.FindGameObjectsWithTag("")
     }
 
     void Update() {
@@ -144,7 +148,15 @@ public class PlayerController : MonoBehaviour {
 
     public void Kill() {
         Debug.Log("Player is ded");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        // play animation
+
+        ModifyBattery(5);
+        foreach(GameObject p in powerUps) {
+            p.SetActive(true);
+        }
+        if (checkpoint == null) ;
     }
 
     void DrawGrapple() {
@@ -322,5 +334,10 @@ public class PlayerController : MonoBehaviour {
         startTime = Time.time;
     }
 
+    void ResetPowerups() {
+        foreach(PickUp p in pickUps) {
+            p.Enable();
+        }
+    }
 
 }
