@@ -30267,6 +30267,12 @@ PrefabInstance:
       propertyPath: hud
       value: 
       objectReference: {fileID: 2011561764}
+    - target: {fileID: 7074414368484911851, guid: 7b26803f2700aca4299940606b019d6a,
+        type: 3}
+      propertyPath: deathParticles
+      value: 
+      objectReference: {fileID: 4531111714756212460, guid: 98b63d6e4434aa842a748aa3decfb3ea,
+        type: 3}
     - target: {fileID: 7074414368484911854, guid: 7b26803f2700aca4299940606b019d6a,
         type: 3}
       propertyPath: m_Name

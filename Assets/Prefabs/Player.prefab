@@ -50,6 +50,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hud: {fileID: 0}
+  deathParticles: {fileID: 4531111714756212460, guid: 98b63d6e4434aa842a748aa3decfb3ea,
+    type: 3}
   isGrounded: 1
   isTouchingWall: 0
   collisionBias: 0.08

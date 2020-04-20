@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour {
     [Header("Graphics")]
     public Animator hud;
+    public GameObject deathParticles;
 
     [Header("Collisions")]
     public bool isGrounded = false;
@@ -179,7 +180,7 @@ public class PlayerController : MonoBehaviour {
     public void Kill() {
         Debug.Log("Player is ded");
         // play animation
-
+        Instantiate(deathParticles, transform.position, transform.rotation);
         // reset battery
         ModifyBattery(5);
 
