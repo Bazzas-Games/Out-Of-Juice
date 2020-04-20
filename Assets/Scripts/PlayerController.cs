@@ -183,7 +183,8 @@ public class PlayerController : MonoBehaviour {
         Instantiate(deathParticles, transform.position, transform.rotation);
         // reset battery
         ModifyBattery(5);
-
+        // drop grapple
+        StopGrapple();
         // enable all pickups
         foreach(PickUp p in pickUps) {
             p.Enable();
