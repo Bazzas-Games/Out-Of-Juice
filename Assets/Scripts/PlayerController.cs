@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
+
+    public Animator hud;
 
     public bool isGrounded = false;
     public bool isTouchingWall = false;
@@ -16,6 +19,7 @@ public class PlayerController : MonoBehaviour {
     public float friction = 20f;
 
     public float grappleSpeed = 5f;
+    public float grappleManoevreSpeed = 3f;
     public float grappleRange = 5f;
     public float grappleMinDistance = .5f;
     
@@ -35,9 +39,10 @@ public class PlayerController : MonoBehaviour {
     private List<RaycastHit2D> contacts = new List<RaycastHit2D>();
     private Rigidbody2D rb;
     private RaycastHit2D grappleRaycastHit;
-    private DistanceJoint2D grappleJoint;
+    private SpringJoint2D grappleJoint;
     private LineRenderer lr;
     private bool hasInput = true;
+    private bool hasGroundInput = true;
     private Animator anim;
     private SpriteRenderer sprite;
 
@@ -56,7 +61,14 @@ public class PlayerController : MonoBehaviour {
         else if (isGrappling) rb.velocity = AccelerateGrapple();
         else rb.velocity = AccelerateAir();
 
-
+        if (isGrappling) {
+            lr.enabled = true;
+            lr.SetPosition(0, transform.position);
+            lr.SetPosition(1, grapplePoint);
+        }
+        else {
+            lr.enabled = false;
+        }
         // update animation variables
         anim.SetBool("isGrounded", isGrounded);
         anim.SetBool("isTouchingWall", isTouchingWall);
@@ -76,10 +88,11 @@ public class PlayerController : MonoBehaviour {
     void FixedUpdate() {
         UpdateContactNormals();
         if (isGrappling) {
-            grappleDistance = Vector2.Distance(transform.position, grapplePoint);
+            grappleDistance = Vector2.Distance(transform.position, grapplePoint) * 0.8f;
             if (grappleDistance - grappleSpeed > grappleMinDistance) grappleJoint.distance = grappleJoint.distance - grappleSpeed;
             else grappleJoint.distance = grappleMinDistance;
         }
+        if (currentBattery < 1) OnBatteryEmpty();
     }
     void LateUpdate() {
         DrawGrapple();
@@ -87,16 +100,18 @@ public class PlayerController : MonoBehaviour {
 
     // all input-dependent methods go here
     void InputPoll() {
+        if (currentBattery <= 0) hasGroundInput = false;
+        else hasGroundInput = true;
+         
         if (!hasInput) {
             elapsedTime = Time.time - startTime;
-            inputVector = Vector3.zero;
             if (elapsedTime >= walljumpInputDelay) hasInput = true;
         }
         else {
             inputVector.x = Input.GetAxisRaw("Horizontal");
             inputVector.y = Input.GetAxisRaw("Vertical");
         }
-        if (Input.GetButton("Fire1") && !isGrappling) {
+        if (Input.GetButton("Fire1") && !isGrappling && currentBattery > 0) {
             Grapple(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         }
         if (isGrappling) {
@@ -108,11 +123,14 @@ public class PlayerController : MonoBehaviour {
                 grappleVector = grapplePoint - (Vector2)transform.position;
             }
         }
-        if (Input.GetButtonDown("Jump")) {
+        if (Input.GetButtonDown("Jump") && currentBattery > 0) {
             if (isGrounded)
                 Jump();
             else if (isTouchingWall)
                 WallJump();
+        }
+        if (Input.GetButtonDown("Reset")){
+            Kill();
         }
     }
 
@@ -128,17 +146,24 @@ public class PlayerController : MonoBehaviour {
 
     public void Kill() {
         Debug.Log("Player is ded");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     void DrawGrapple() {
         if (!isGrappling) return;
 
     }
+    void OnBatteryEmpty() {
+        if (isGrounded && rb.velocity.magnitude < 0.1f) Kill();
+    }
 
     public void ModifyBattery(int amount) {
         currentBattery += amount;
         if (currentBattery > maxBattery) currentBattery = maxBattery;
-        else if (currentBattery <= 0) Kill();
+        if (currentBattery < 0) currentBattery = 0;
+
+        hud.SetInteger("charge", currentBattery);
+        hud.SetTrigger("refresh");
     }
 
     void UpdateContactNormals() {
@@ -181,42 +206,54 @@ public class PlayerController : MonoBehaviour {
 
 
     Vector2 AccelerateGround() {
+        Vector2 inputVectorGround = inputVector;
+        
+        if (!hasGroundInput)
+            inputVectorGround = Vector2.zero;
+
         float speed = Mathf.Abs(rb.velocity.x);
         if (speed != 0) {
             float slow = speed * friction * Time.deltaTime;
             rb.velocity *= new Vector2(Mathf.Max(speed - slow, 0) / speed, 1);
         }
-        return Accelerate(new Vector2(inputVector.x, 0), rb.velocity, groundSpeed, maxVelocity);
+        return Accelerate(new Vector2(inputVectorGround.x, 0), rb.velocity, groundSpeed, maxVelocity);
     }
 
 
     Vector2 AccelerateAir() {
+        Vector2 inputVectorAir = inputVector;
+        if(!hasInput)
+        inputVectorAir = Vector2.zero;
+
         float speed = Mathf.Abs(rb.velocity.x);
         if (speed != 0) {
             float slow = speed * airResistance * Time.deltaTime;
             rb.velocity *= new Vector2(Mathf.Max(speed - slow, 0) / speed, 1);
         }
-        return Accelerate(new Vector2(inputVector.x, 0), rb.velocity, airSpeed, maxVelocity);
+        return Accelerate(new Vector2(inputVectorAir.x, 0), rb.velocity, airSpeed, maxVelocity);
     }
 
 
     Vector2 AccelerateGrapple() {
+        
 
-        return Accelerate(inputVector.normalized, rb.velocity, airSpeed, maxVelocity);
+
+        return Accelerate(inputVector.normalized, rb.velocity, grappleManoevreSpeed, 999999);
     }
 
 
-
-
     void Jump() {
+        ModifyBattery(-1);
         isGrounded = false;
         rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         anim.SetTrigger("jump");
     }
     void WallJump() {
+        ModifyBattery(-1);
         StartDelay();
         rb.velocity = new Vector2(wallNormal.x * jumpSpeed, jumpSpeed);
     }
+
 
     void Grapple(Vector2 direction) {
         // raycast for grapple
@@ -228,10 +265,11 @@ public class PlayerController : MonoBehaviour {
             // set grapple point
             grapplePoint = grappleRaycastHit.point;
             isGrappling = true;
-            grappleJoint = gameObject.AddComponent<DistanceJoint2D>();
+            grappleJoint = gameObject.AddComponent<SpringJoint2D>();
             grappleJoint.autoConfigureConnectedAnchor = false;
             grappleJoint.connectedAnchor = grapplePoint;
             grappleJoint.enableCollision = true;
+            
 
             grappleDistance = Vector2.Distance(transform.position, grapplePoint);
 
@@ -239,7 +277,10 @@ public class PlayerController : MonoBehaviour {
         }
 
     }
+
+
     void StopGrapple() {
+        ModifyBattery(-1);
         isGrappling = false;
         Component.Destroy(grappleJoint);
     }
