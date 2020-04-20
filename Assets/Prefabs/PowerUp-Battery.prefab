@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 732016044886999440}
   - component: {fileID: 732016044886999439}
   - component: {fileID: 732016044886999438}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PowerUp-Battery
   m_TagString: PowerUp
   m_Icon: {fileID: 0}

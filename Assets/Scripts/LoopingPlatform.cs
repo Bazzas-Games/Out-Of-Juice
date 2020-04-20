@@ -26,6 +26,7 @@ public class LoopingPlatform : MonoBehaviour
 
     public void Move()
     {
+        isPowered = true;
         if (transform.position == pos1.position)
         {
             nextPos = pos2.position;
@@ -39,6 +40,7 @@ public class LoopingPlatform : MonoBehaviour
     }
 
     public void Reset(){
+        isPowered = false;
         transform.position = pos1.position;
     }
 
