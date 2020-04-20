@@ -125,6 +125,15 @@ TextureImporter:
   - first:
       213: -188924367111568917
     second: robot_19
+  - first:
+      213: 8374479288940417581
+    second: robot_21
+  - first:
+      213: -2479870329506662454
+    second: robot_20
+  - first:
+      213: 8582490289321900778
+    second: robot_21
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -184,8 +193,8 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 4096
-    resizeAlgorithm: 1
+    maxTextureSize: 128
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -196,8 +205,8 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 4096
-    resizeAlgorithm: 1
+    maxTextureSize: 128
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -208,8 +217,8 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
-    maxTextureSize: 4096
-    resizeAlgorithm: 1
+    maxTextureSize: 128
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -238,7 +247,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 144
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -259,7 +268,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 16
-        y: 144
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -280,7 +289,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 144
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -301,7 +310,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
-        y: 144
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -322,7 +331,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 144
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -343,7 +352,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 80
-        y: 144
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -364,7 +373,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 128
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -385,7 +394,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 16
-        y: 128
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -406,7 +415,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 128
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -427,7 +436,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
-        y: 128
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -448,7 +457,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 128
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -469,7 +478,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 80
-        y: 128
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -490,7 +499,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
-        y: 128
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -511,7 +520,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 112
-        y: 128
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -532,7 +541,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 112
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -553,7 +562,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 16
-        y: 112
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -574,7 +583,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 112
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -595,7 +604,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
-        y: 112
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -616,7 +625,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 112
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -637,7 +646,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 80
-        y: 112
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -658,7 +667,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 96
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -668,8 +677,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 87cc56af901a792c0800000000000000
-      internalID: -4424891044640469896
+      spriteID: ac779b0031bb59dd0800000000000000
+      internalID: -2479870329506662454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: robot_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aea754732712b1770800000000000000
+      internalID: 8582490289321900778
       vertices: []
       indices: 
       edges: []
