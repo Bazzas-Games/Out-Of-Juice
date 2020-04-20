@@ -166,6 +166,7 @@ MonoBehaviour:
   maxVelocity: 5
   friction: 20
   grappleSpeed: 0.1
+  grappleManoevreSpeed: 20
   grappleRange: 10
   grappleMinDistance: 0.8
   walljumpInputDelay: 0.3
@@ -318,7 +319,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 98f71e481fad20946b5a3399c2b9113c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
