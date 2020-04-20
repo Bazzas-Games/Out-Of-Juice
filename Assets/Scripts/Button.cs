@@ -36,10 +36,10 @@ public class Button : MonoBehaviour
             Door d;
             LoopingPlatform p;
             if (i.TryGetComponent<Door>(out d) && !opensPermanently) {
-                //d.Reset();
+                d.Reset();
             }
             if (i.TryGetComponent<LoopingPlatform>(out p) && !opensPermanently) {
-                //p.Reset();
+                p.Reset();
             }
         }
         isPowered = false;
