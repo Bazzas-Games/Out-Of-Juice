@@ -38,6 +38,10 @@ public class LoopingPlatform : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, nextPos, speed * Time.deltaTime);
     }
 
+    public void Reset(){
+        transform.position = pos1.position;
+    }
+
 }
 
 

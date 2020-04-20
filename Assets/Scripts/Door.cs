@@ -29,6 +29,7 @@ public class Door : MonoBehaviour
     // Move to the target end position.
     public void Move()
     {
+        
         // Distance moved equals elapsed time times speed..
         float distCovered = (Time.time - startTime) * speed;
 
