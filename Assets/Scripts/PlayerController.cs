@@ -166,9 +166,10 @@ public class PlayerController : MonoBehaviour {
         currentBattery += amount;
         if (currentBattery > maxBattery) currentBattery = maxBattery;
         if (currentBattery < 0) currentBattery = 0;
-
-        hud.SetInteger("charge", currentBattery);
-        hud.SetTrigger("refresh");
+        if (hud != null) {
+            hud.SetInteger("charge", currentBattery);
+            hud.SetTrigger("refresh");
+        }
     }
 
     void UpdateContactNormals() {
@@ -276,7 +277,6 @@ public class PlayerController : MonoBehaviour {
         anim.SetTrigger("jump");
     }
     void WallJump() {
-        ModifyBattery(-1);
         StartDelay();
         rb.velocity = new Vector2(wallNormal.x * jumpSpeed, jumpSpeed);
     }
