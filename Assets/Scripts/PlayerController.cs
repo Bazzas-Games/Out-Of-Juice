@@ -36,7 +36,9 @@ public class PlayerController : MonoBehaviour {
     private Vector2 inputVector = Vector2.zero;
     private Vector2 grappleVector = Vector2.zero;
     private Vector2 grapplePoint = Vector2.zero;
+    private BoxCollider2D boxCollider;
     private List<Vector2> contactVectors = new List<Vector2>();
+    private Vector2[] failsafeVectors = { Vector2.right, Vector2.left, Vector2.down };
     private List<RaycastHit2D> contacts = new List<RaycastHit2D>();
     private Rigidbody2D rb;
     private RaycastHit2D grappleRaycastHit;
@@ -53,6 +55,7 @@ public class PlayerController : MonoBehaviour {
         lr = GetComponent<LineRenderer>();
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
+        boxCollider = GetComponent<BoxCollider2D>();
     }
 
     void Update() {
@@ -62,14 +65,8 @@ public class PlayerController : MonoBehaviour {
         else if (isGrappling) rb.velocity = AccelerateGrapple();
         else rb.velocity = AccelerateAir();
 
-        if (isGrappling) {
-            lr.enabled = true;
-            lr.SetPosition(0, transform.position);
-            lr.SetPosition(1, grapplePoint);
-        }
-        else {
-            lr.enabled = false;
-        }
+       
+        
         // update animation variables
         anim.SetBool("isGrounded", isGrounded);
         anim.SetBool("isTouchingWall", isTouchingWall);
@@ -151,11 +148,18 @@ public class PlayerController : MonoBehaviour {
     }
 
     void DrawGrapple() {
-        if (!isGrappling) return;
+        if (isGrappling) {
+            lr.enabled = true;
+            lr.SetPosition(0, transform.position);
+            lr.SetPosition(1, grapplePoint);
+        }
+        else {
+            lr.enabled = false;
+        }
 
     }
     void OnBatteryEmpty() {
-        if (isGrounded && rb.velocity.magnitude < 0.1f) Kill();
+        if (!isGrappling && isGrounded && rb.velocity.magnitude < 0.1f) Kill();
     }
 
     public void ModifyBattery(int amount) {
@@ -171,15 +175,37 @@ public class PlayerController : MonoBehaviour {
         isGrounded = false;
         isTouchingWall = false;
         List<Vector2> toRemove = new List<Vector2>();
-        foreach (Vector2 v in contactVectors) {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, v, v.magnitude + collisionBias, LayerMask.GetMask("Environment"));
+
+        // failsafe cast
+        foreach (Vector2 v in failsafeVectors) {
+
+            float rayDistance = v.magnitude / 2 + collisionBias;
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, v, rayDistance, LayerMask.GetMask("Environment"));
             if (hit.collider != null) {
                 float angle = Vector2.Angle(Vector3.up, hit.normal);
-                if (angle == 0) {
+                if (angle > -1 && angle < 1) {
                     isGrounded = true;
                     Debug.DrawRay(hit.point, hit.normal, Color.green);
                 }
-                else if (angle == 90 || angle == -90) {
+                else if ((angle < 91 && angle > 89) || (angle < -89 && angle > -91)) {
+                    wallNormal = hit.normal;
+                    isTouchingWall = true;
+                    Debug.DrawRay(hit.point, hit.normal, Color.yellow);
+                }
+            }
+        }
+
+        // continuous contact check
+        foreach (Vector2 v in contactVectors) {
+            Debug.DrawRay(transform.position, v, Color.red, .2f);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, v, v.magnitude + collisionBias, LayerMask.GetMask("Environment"));
+            if (hit.collider != null) {
+                float angle = Vector2.Angle(Vector3.up, hit.normal);
+                if (angle > -1 && angle < 1) {
+                    isGrounded = true;
+                    Debug.DrawRay(hit.point, hit.normal, Color.green);
+                }
+                else if ((angle < 91 && angle > 89)|| (angle < -89 && angle >-91)) {
                     wallNormal = hit.normal;
                     isTouchingWall = true;
                     Debug.DrawRay(hit.point, hit.normal, Color.yellow);
@@ -277,8 +303,9 @@ public class PlayerController : MonoBehaviour {
             grappleDistance = Vector2.Distance(transform.position, grapplePoint);
 
             grappleJoint.distance = grappleDistance;
+            ModifyBattery(-1);
         }
-        ModifyBattery(-1);
+        
 
 
     }

@@ -1633,6 +1633,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7074414368484911851, guid: 7b26803f2700aca4299940606b019d6a,
+        type: 3}
+      propertyPath: grappleSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7074414368484911851, guid: 7b26803f2700aca4299940606b019d6a,
+        type: 3}
+      propertyPath: grappleForce
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7074414368484911854, guid: 7b26803f2700aca4299940606b019d6a,
         type: 3}
       propertyPath: m_Name
