@@ -156,6 +156,14 @@ public class PlayerController : MonoBehaviour {
             Vector2 contactVector = c.point - (Vector2)transform.position;
             if (!contactVectors.Contains(contactVector)) contactVectors.Add(contactVector);
         }
+        if (collision.gameObject.CompareTag("Button")) {
+            Button b = collision.collider.GetComponent<Button>();
+            foreach (ContactPoint2D c in contactPoints) {
+                if (Vector2.Angle(c.normal, b.gameObject.transform.up) <= 45){
+                    b.Press();
+                }
+            }
+        }
     }
 
     public void Kill() {
@@ -169,6 +177,10 @@ public class PlayerController : MonoBehaviour {
         foreach(PickUp p in pickUps) {
             p.Enable();
         }
+        foreach(GameObject g in GameObject.FindGameObjectsWithTag("Button")) {
+            g.GetComponent<Button>().Reset();
+        }
+
         rb.velocity = Vector3.zero;
         transform.position = checkpoint.transform.position;
     }

@@ -53,21 +53,24 @@ MonoBehaviour:
   isGrounded: 1
   isTouchingWall: 0
   collisionBias: 0.08
-  isGrappling: 0
   groundSpeed: 200
+  maxVelocity: 5
+  friction: 20
   airSpeed: 50
   airResistance: 2
   jumpSpeed: 9.5
-  maxVelocity: 5
-  friction: 20
+  walljumpInputDelay: 0.3
+  isGrappling: 0
   grappleSpeed: 0.2
   grappleForce: 5
   grappleManoevreSpeed: 20
   grappleRange: 10
   grappleMinDistance: 0.8
-  walljumpInputDelay: 0.3
   maxBattery: 5
   currentBattery: 5
+  checkpointPrefab: {fileID: 6358771838961204363, guid: 340e3cb47d493634e80125105c7b28f2,
+    type: 3}
+  checkpoint: {fileID: 0}
 --- !u!212 &7074414368484911855
 SpriteRenderer:
   m_ObjectHideFlags: 0

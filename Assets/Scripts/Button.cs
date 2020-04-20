@@ -4,31 +4,41 @@ using UnityEngine;
 
 public class Button : MonoBehaviour
 {
-    public Door[] door;
-    public LoopingPlatform[] loopingPlatform;
-    public bool isPowered = false;
+    public GameObject[] interactObjects;
+    public bool opensPermanently = false;
+    private Animator anim;
+    bool isPowered = false;
 
-    private void Update()
-    {
-        Pushed();
+    void Start() {
+        anim = GetComponent<Animator>();
     }
-    public void Pushed()
+
+    public void Press()
     {
-        if (isPowered == true)
-        {
-            foreach(Door d in door)
-            {
+        foreach(GameObject i in interactObjects) {
+            Door d;
+            LoopingPlatform p;
+            if(i.TryGetComponent<Door>(out d)) {
                 d.Move();
             }
-            foreach(LoopingPlatform l in loopingPlatform)
-            {
-                l.Move();
+            if(i.TryGetComponent<LoopingPlatform>(out p)) {
+                p.Move();
             }
         }
-        else
-        {
-            isPowered = false;
-        }
+        anim.SetBool("isPowered", isPowered);
+    }
 
+    public void Reset() {
+        foreach (GameObject i in interactObjects) {
+            Door d;
+            LoopingPlatform p;
+            if (i.TryGetComponent<Door>(out d) && !opensPermanently) {
+                //d.Reset();
+            }
+            if (i.TryGetComponent<LoopingPlatform>(out p) && !opensPermanently) {
+                //p.Reset();
+            }
+        }
+        anim.SetBool("isPowered", isPowered);
     }
 }

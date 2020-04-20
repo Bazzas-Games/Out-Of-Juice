@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Hazard
   - Enviro
+  - PowerUp
+  - Button
   layers:
   - Default
   - TransparentFX
