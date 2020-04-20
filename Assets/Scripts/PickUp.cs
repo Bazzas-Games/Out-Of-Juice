@@ -10,10 +10,10 @@ public class PickUp : MonoBehaviour
             Disable();
         }
     }
-    void Enable(){
+    public void Enable(){
         gameObject.SetActive(true);
     }
-    void Disable(){
+    public void Disable(){
         gameObject.SetActive(false);
     }
 }

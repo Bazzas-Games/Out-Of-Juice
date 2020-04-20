@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour {
     private bool hasGroundInput = true;
     private Animator anim;
     private SpriteRenderer sprite;
-    private List<PickUp> pickUps = new List<PickUp>();
+    private PickUp[] pickUps;
 
 
     void Start() {
@@ -59,7 +59,11 @@ public class PlayerController : MonoBehaviour {
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
-        GameObject.FindGameObjectsWithTag("")
+        GameObject[] pickupObjects = GameObject.FindGameObjectsWithTag("PowerUp");
+        pickUps = new PickUp[pickupObjects.Length];
+        for(int i = 0; i < pickUps.Length; i++) {
+            pickUps[i] = pickupObjects[i].GetComponent<PickUp>();
+        }
     }
 
     void Update() {
@@ -153,8 +157,8 @@ public class PlayerController : MonoBehaviour {
         // play animation
 
         ModifyBattery(5);
-        foreach(GameObject p in powerUps) {
-            p.SetActive(true);
+        foreach(PickUp p in pickUps) {
+            p.Enable();
         }
         if (checkpoint == null) ;
     }
@@ -334,7 +338,7 @@ public class PlayerController : MonoBehaviour {
         startTime = Time.time;
     }
 
-    void ResetPowerups() {
+    public void ResetPowerups() {
         foreach(PickUp p in pickUps) {
             p.Enable();
         }
