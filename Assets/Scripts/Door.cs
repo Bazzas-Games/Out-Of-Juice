@@ -38,4 +38,8 @@ public class Door : MonoBehaviour
         // Set our position as a fraction of the distance between the markers.
         transform.position = Vector3.Lerp(startMarker.position, endMarker.position, fractionOfJourney);
     }
+
+    public void Reset(){
+        transform.position = startMarker.position;
+    }
 }

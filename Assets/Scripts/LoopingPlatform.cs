@@ -7,6 +7,7 @@ public class LoopingPlatform : MonoBehaviour
     // Transforms to act as start and end markers for journey.
     public Transform pos1, pos2;
     public Transform startPos;
+    public bool isPowered = false;
 
     public float speed = 1.0f;
 
@@ -15,6 +16,12 @@ public class LoopingPlatform : MonoBehaviour
     private void Start()
     {
         nextPos = startPos.position;
+    }
+
+    void Update(){
+        if(isPowered == true){
+            Move();
+        }
     }
 
     public void Move()
