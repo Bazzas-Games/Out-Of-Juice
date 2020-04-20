@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour {
     public float friction = 20f;
 
     public float grappleSpeed = 5f;
+    public float grappleForce = 5f;
     public float grappleManoevreSpeed = 3f;
     public float grappleRange = 5f;
     public float grappleMinDistance = .5f;
@@ -88,8 +89,8 @@ public class PlayerController : MonoBehaviour {
     void FixedUpdate() {
         UpdateContactNormals();
         if (isGrappling) {
-            grappleDistance = Vector2.Distance(transform.position, grapplePoint) * 0.8f;
-            if (grappleDistance - grappleSpeed > grappleMinDistance) grappleJoint.distance = grappleJoint.distance - grappleSpeed;
+            grappleDistance = Vector2.Distance(transform.position, grapplePoint) - grappleSpeed;
+            if (grappleDistance > grappleMinDistance) grappleJoint.distance = grappleDistance;
             else grappleJoint.distance = grappleMinDistance;
         }
         if (currentBattery < 1) OnBatteryEmpty();
@@ -257,6 +258,7 @@ public class PlayerController : MonoBehaviour {
 
     void Grapple(Vector2 direction) {
         // raycast for grapple
+
         grappleRaycastHit = Physics2D.Raycast(transform.position, direction - (Vector2)transform.position, grappleRange, LayerMask.GetMask("Environment"));
         Debug.DrawRay(transform.position, (direction - (Vector2)transform.position).normalized * grappleRange);
 
@@ -269,18 +271,20 @@ public class PlayerController : MonoBehaviour {
             grappleJoint.autoConfigureConnectedAnchor = false;
             grappleJoint.connectedAnchor = grapplePoint;
             grappleJoint.enableCollision = true;
+            grappleJoint.frequency = grappleForce;
             
 
             grappleDistance = Vector2.Distance(transform.position, grapplePoint);
 
             grappleJoint.distance = grappleDistance;
         }
+        ModifyBattery(-1);
+
 
     }
 
 
     void StopGrapple() {
-        ModifyBattery(-1);
         isGrappling = false;
         Component.Destroy(grappleJoint);
     }
