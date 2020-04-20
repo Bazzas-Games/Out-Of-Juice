@@ -57,9 +57,11 @@ public class PlayerController : MonoBehaviour {
     private Animator anim;
     private SpriteRenderer sprite;
     private PickUp[] pickUps;
-
+    private GameObject crosshair;
+    private Animator crosshairAnim;
 
     void Start() {
+        Cursor.visible = false;
         rb = GetComponent<Rigidbody2D>();
         lr = GetComponent<LineRenderer>();
         anim = GetComponent<Animator>();
@@ -67,6 +69,8 @@ public class PlayerController : MonoBehaviour {
         boxCollider = GetComponent<BoxCollider2D>();
         GameObject[] pickupObjects = GameObject.FindGameObjectsWithTag("PowerUp");
         pickUps = new PickUp[pickupObjects.Length];
+        crosshair = GameObject.FindGameObjectWithTag("Crosshair");
+        crosshairAnim = crosshair.GetComponent<Animator>();
         for(int i = 0; i < pickUps.Length; i++) {
             pickUps[i] = pickupObjects[i].GetComponent<PickUp>();
         }
@@ -75,6 +79,11 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Update() {
+        Vector3 mousePosWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        crosshair.transform.position =  mousePosWorld + new Vector3(0, 0, 1);
+
+        RaycastHit2D temp = Physics2D.Raycast(transform.position, mousePosWorld - transform.position, grappleRange, LayerMask.GetMask("Environment"));
+        crosshairAnim.SetBool("inRange", temp.collider != null);
         InputPoll();
 
         if (isGrounded) rb.velocity = AccelerateGround();
@@ -121,11 +130,10 @@ public class PlayerController : MonoBehaviour {
             elapsedTime = Time.time - startTime;
             if (elapsedTime >= walljumpInputDelay) hasInput = true;
         }
-        else {
-            inputVector.x = Input.GetAxisRaw("Horizontal");
-            inputVector.y = Input.GetAxisRaw("Vertical");
-        }
+        inputVector.x = Input.GetAxisRaw("Horizontal");
+        inputVector.y = Input.GetAxisRaw("Vertical");        
         if (Input.GetButton("Fire1") && !isGrappling && currentBattery > 0) {
+            Cursor.visible = false;
             Grapple(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         }
         if (isGrappling) {
@@ -137,8 +145,8 @@ public class PlayerController : MonoBehaviour {
                 grappleVector = grapplePoint - (Vector2)transform.position;
             }
         }
-        if (Input.GetButtonDown("Jump") && currentBattery > 0) {
-            if (isGrounded)
+        if (Input.GetButtonDown("Jump")) {
+            if (isGrounded && currentBattery > 0)
                 Jump();
             else if (isTouchingWall)
                 WallJump();

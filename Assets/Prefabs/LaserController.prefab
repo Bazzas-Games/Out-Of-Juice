@@ -45,5 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laser:
   - {fileID: 0}
+  - {fileID: 0}
   isPowered: 0
   targetTime: 2

@@ -64,7 +64,7 @@ MonoBehaviour:
   grappleSpeed: 0.2
   grappleForce: 5
   grappleManoevreSpeed: 20
-  grappleRange: 10
+  grappleRange: 6
   grappleMinDistance: 0.8
   maxBattery: 5
   currentBattery: 5
