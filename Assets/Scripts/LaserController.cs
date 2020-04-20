@@ -21,6 +21,7 @@ public class LaserController : MonoBehaviour
         isPowered = true;
         foreach (GameObject l in laser)
         {
+            if(l != null)
             beams.Add(l.GetComponentInChildren<EnviroHazard>().gameObject);
         }
     }
@@ -36,14 +37,14 @@ public class LaserController : MonoBehaviour
         {
            foreach(GameObject b in beams)
             {
-                b.SetActive(true);
+                if (b != null) b.SetActive(true);
             }
         }
         else
         {
             foreach(GameObject b in beams)
             {
-               b.SetActive(false);
+               if (b != null) b.SetActive(false);
             }
             
         }

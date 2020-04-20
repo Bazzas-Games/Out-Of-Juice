@@ -248,6 +248,7 @@ public class PlayerController : MonoBehaviour {
         // continuous contact check
         foreach (Vector2 v in contactVectors) {
             Debug.DrawRay(transform.position, v, Color.red, .2f);
+            if (v.magnitude > 2f) toRemove.Add(v);
             RaycastHit2D hit = Physics2D.Raycast(transform.position, v, v.magnitude + collisionBias, LayerMask.GetMask("Environment"));
             if (hit.collider != null) {
                 float angle = Vector2.Angle(Vector3.up, hit.normal);
