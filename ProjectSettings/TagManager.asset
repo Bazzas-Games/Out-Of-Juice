@@ -9,6 +9,7 @@ TagManager:
   - PowerUp
   - Button
   - Crosshair
+  - Timer
   layers:
   - Default
   - TransparentFX
