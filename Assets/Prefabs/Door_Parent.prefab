@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6606863515162474431}
   m_Layer: 8
-  m_Name: DoorController
+  m_Name: Door_Parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
