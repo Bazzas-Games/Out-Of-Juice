@@ -15,6 +15,7 @@ public class LoopingPlatform : MonoBehaviour{
     Transform tempTrans;
     Rigidbody2D rb;
     public GameObject object1, object2;
+    // object1 is platform, object2 is player.
 
     private void Start(){
         nextPos = startPos.position;
