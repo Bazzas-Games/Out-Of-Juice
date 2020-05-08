@@ -171,7 +171,7 @@ PrefabInstance:
     - target: {fileID: 5154161108963458593, guid: 2ec2bf0fd273bbd44a19ef9eb9a99887,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5154161108963458593, guid: 2ec2bf0fd273bbd44a19ef9eb9a99887,
         type: 3}
@@ -258,6 +258,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3995695296091522229, guid: dc89ac31e3ee2684097c186ecc0844a2,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 313442729}
+    - target: {fileID: 3995695296091522229, guid: dc89ac31e3ee2684097c186ecc0844a2,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
+      objectReference: {fileID: 0}
     - target: {fileID: 6119790568918671903, guid: dc89ac31e3ee2684097c186ecc0844a2,
         type: 3}
       propertyPath: m_Name
@@ -272,6 +282,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: DeactivateMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8258103660693081289, guid: dc89ac31e3ee2684097c186ecc0844a2,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 313442729}
+    - target: {fileID: 8258103660693081289, guid: dc89ac31e3ee2684097c186ecc0844a2,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadMenu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc89ac31e3ee2684097c186ecc0844a2, type: 3}
@@ -6066,8 +6086,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 257882961}
-  - {fileID: 16479258}
   - {fileID: 1891604059}
+  - {fileID: 16479258}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6590,7 +6610,7 @@ PrefabInstance:
     - target: {fileID: 7010865607224342407, guid: 313e21a423dcae044994f9dbec801e6a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7010865607224342407, guid: 313e21a423dcae044994f9dbec801e6a,
         type: 3}
